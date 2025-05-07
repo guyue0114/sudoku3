@@ -113,30 +113,65 @@ public class MySudokuBoard {
 
    
    public boolean solve() {
+   //check the board is valid or not
       if (!isValid()){
          System.out.println("this board is not valid");
          return false;
       }
+   //check the board is solved or not
       if (isSolved()){
          System.out.println("this board is solved");
          return true;
       }
          
-         
-      for (int r = 0; r < SIZE; r++) {
-         for (int c = 0; c < SIZE; c++) {
-            if (myBoard[r][c] == '.') {
-               for (char num = '1'; num <= '9'; num++) {
-                  myBoard[r][c] = num;
-                  if (isValid() && solve()) {
-                     return true;  
-                  }
-                  myBoard[r][c] = '.'; 
-               }
-               return false;
+    for (int col = 0; col < SIZE; col++) {
+            for (int row = 0; row < SIZE; row++) {
+                if (board[row][col] == ' ' || board[row][col] == '.' || board[row][col] == '0') {
+                    for (char val = '1'; val <= '9'; val++) {
+                        //forward
+                        board[row][col] = val;
+                        //try solve
+                        if(solve()) {
+                            return true;
+                        }
+                        //backward
+                        board[row][col] = '.';
+
+                    }
+                }
+
             }
-         }
-      }
-      return false;  
-      }
+        }
 }
+
+
+/*
+Initial board
+ My Board:
+ 
+ 53..7....
+ 6..195...
+ .98....6.
+ 8...6...3
+ 4..8.3..1
+ 7...2...6
+ .6....28.
+ ...419..5
+ ....8..79
+ 
+ 
+ Solving board...this board is solved
+ SOLVED in 0.134 seconds.
+ 
+ My Board:
+ 
+ 534678912
+ 672195348
+ 198342567
+ 859761423
+ 426853791
+ 713924856
+ 961537284
+ 287419635
+ 345286179
+*/
