@@ -145,12 +145,6 @@ public class MySudokuBoard {
             }
         }
 
-
-          else if(!solve()){
-              board[row][col] =' ';
-          }
-
-
         return false;
     }
   }
