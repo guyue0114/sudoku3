@@ -109,5 +109,34 @@ public class MySudokuBoard {
       }
       return result;
    }
+   
 
+   
+   public boolean solve() {
+      if (!isValid()){
+         System.out.println("this board is not valid");
+         return false;
+      }
+      if (isSolved()){
+         System.out.println("this board is solved");
+         return true;
+      }
+         
+         
+      for (int r = 0; r < SIZE; r++) {
+         for (int c = 0; c < SIZE; c++) {
+            if (myBoard[r][c] == '.') {
+               for (char num = '1'; num <= '9'; num++) {
+                  myBoard[r][c] = num;
+                  if (isValid() && solve()) {
+                     return true;  
+                  }
+                  myBoard[r][c] = '.'; 
+               }
+               return false;
+            }
+         }
+      }
+      return false;  
+      }
 }
