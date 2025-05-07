@@ -124,9 +124,11 @@ public class MySudokuBoard {
          return true;
       }
          
-    for (int col = 0; col < SIZE; col++) {
-            for (int row = 0; row < SIZE; row++) {
+    for (int col = 0; col < board.length; col++) {
+            for (int row = 0; row < board[0].length; row++) {
                 if (board[row][col] == ' ' || board[row][col] == '.' || board[row][col] == '0') {
+                // Try all possible values from 1 to 9
+                // temporarily place the value in the cell
                     for (char val = '1'; val <= '9'; val++) {
                         //forward
                         board[row][col] = val;
@@ -142,7 +144,16 @@ public class MySudokuBoard {
 
             }
         }
-}
+
+
+          else if(!solve()){
+              board[row][col] =' ';
+          }
+
+
+        return false;
+    }
+  }
 
 
 /*
@@ -161,7 +172,7 @@ Initial board
  
  
  Solving board...this board is solved
- SOLVED in 0.134 seconds.
+ SOLVED in 0.126 seconds.
  
  My Board:
  
